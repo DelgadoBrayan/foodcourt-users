@@ -23,6 +23,16 @@ public class OwnerUseCase implements IOwnerServicePort {
     private final IOwnerPersistencePort userPersistencePort;
 
     @Override
+    public Owner findUserByEmail(String email) {
+        return userPersistencePort.findUserByEmail(email);
+    }
+
+    @Override
+    public Owner findUserById(Long userId) {
+        return userPersistencePort.findUserById(userId);
+    }
+
+    @Override
     public Owner saveOwner(Owner owner) {
         ContactInfo contactInfo = owner.getContactInfo();
         AccountInfo accountInfo = owner.getAccountInfo();

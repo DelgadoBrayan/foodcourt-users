@@ -19,8 +19,18 @@ public class OwnerHandler {
 
     public OwnerRequestDto saveUser(OwnerRequestDto dto) {
         Owner owner = ownerMapper.toEntity(dto);
-        Owner savedUser = ownerServicePort.saveOwner(owner);
-        return ownerMapper.toDto(savedUser);
+        Owner savedOwner = ownerServicePort.saveOwner(owner);
+        return ownerMapper.toDto(savedOwner);
+    }
+
+    public OwnerRequestDto findUserByEmail(String email) {
+        Owner owner = ownerServicePort.findUserByEmail(email);
+        return ownerMapper.toDto(owner);
+    }
+
+    public OwnerRequestDto findUserById(Long userId) {
+        Owner owner = ownerServicePort.findUserById(userId);
+        return ownerMapper.toDto(owner);
     }
 
 }
