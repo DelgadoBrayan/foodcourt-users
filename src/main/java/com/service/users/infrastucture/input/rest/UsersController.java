@@ -24,4 +24,10 @@ public class UsersController {
         usersHandler.saveEmployee(employeeRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PostMapping("/client")
+    public ResponseEntity<Void> createClient(@Valid @RequestBody UsersRequest clientRequest) {
+        usersHandler.saveClient(clientRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }

@@ -22,4 +22,11 @@ public class UsersHandler {
         Users saveEmployee = usersServicePort.saveEmployee(employee);
         return usersMapper.toDto(saveEmployee);
     }
+
+    public UsersRequest saveClient(UsersRequest dto){
+        Users client = usersMapper.toEntity(dto);
+        Users saveClient = usersServicePort.saveClient(client);
+        return usersMapper.toDto(saveClient);
+    }
+
 }
