@@ -19,5 +19,16 @@ public class OwnerAdapter implements IOwnerPersistencePort {
         OwnerEntity savedEntity = repository.save(entity);
         return mapper.toDomain(savedEntity);
     }
+
+    @Override
+    public Owner findUserByEmail(String email) {
+        OwnerEntity entity = repository.findByEmail(email);
+        return mapper.toDomain(entity);
+    }
+    @Override
+    public Owner findUserById(Long userId) {
+        OwnerEntity entity = repository.findById(userId).orElse(null);
+        return entity != null ? mapper.toDomain(entity) : null;
+    }
    
 }
