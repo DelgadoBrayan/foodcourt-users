@@ -20,23 +20,34 @@ public class UsersUseCase implements IUsersServicePort{
  @Override
 public Users saveEmployee(Users employee) {
 
-    validateEmployeeFields(employee);
+    validateUserFields(employee);
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     String encodedPassword = passwordEncoder.encode(employee.getPassword());
     employee.setPassword(encodedPassword);
     employee.setIdRol(2L);
     
-    return usersPersistencePort.saveEmployee(employee);
+    return usersPersistencePort.saveUser(employee);
 }
 
-private void validateEmployeeFields(Users employee) {
+
+@Override
+public Users saveClient(Users client) {
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    String encodedPassword = passwordEncoder.encode(client.getPassword());
+    client.setPassword(encodedPassword);
+    client.setIdRol(3L);
+    
+    return usersPersistencePort.saveUser(client);
+}
+
+private void validateUserFields(Users employee) {
     ContactInfo contactInfo = employee.getContactInfo();
     if (isNullOrEmpty(employee.getLastName())) {
-        throw new InvalidUserException("El apellido del empleado no debe estar vacío o nulo");
+        throw new InvalidUserException("El apellido del usuario no debe estar vacío o nulo");
     }
     if (isNullOrEmpty(employee.getLastName())) {
-        throw new InvalidUserException("El nombre del empleado no debe estar vacío o nulo");
+        throw new InvalidUserException("El nombre del usuario no debe estar vacío o nulo");
     }
     if (isNullOrEmpty(contactInfo.getDocumentId())) {
         throw new InvalidUserException("El documento de identidad no debe estar vacío o nulo");
@@ -55,5 +66,6 @@ private void validateEmployeeFields(Users employee) {
 private boolean isNullOrEmpty(String value) {
     return value == null || value.trim().isEmpty();
 }
+
   
 }
