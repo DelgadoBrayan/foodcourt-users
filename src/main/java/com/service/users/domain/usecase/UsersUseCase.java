@@ -41,6 +41,11 @@ public Users saveClient(Users client) {
     return usersPersistencePort.saveUser(client);
 }
 
+@Override
+public Users findById(Long userId) {
+    return usersPersistencePort.findById(userId);
+}
+
 private void validateUserFields(Users employee) {
     ContactInfo contactInfo = employee.getContactInfo();
     if (isNullOrEmpty(employee.getLastName())) {

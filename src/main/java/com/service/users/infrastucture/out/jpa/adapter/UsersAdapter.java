@@ -23,5 +23,11 @@ public class UsersAdapter implements IUsersPersistencePort {
         
         return usersEntityMapper.toDomain(saveUserEntity);
     }
+
+    @Override
+    public Users findById(Long idUser) {
+         UsersEntity entity = userRepository.findById(idUser).orElse(null);
+        return entity != null ? usersEntityMapper.toDomain(entity) : null;
+    }
     
 }

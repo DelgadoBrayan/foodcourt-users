@@ -29,4 +29,9 @@ public class UsersHandler {
         return usersMapper.toDto(saveClient);
     }
 
+    public UsersRequest findUserById(Long userId){
+        Users user = usersServicePort.findById(userId);
+        return usersMapper.toDto(user);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.service.users.application.handler;
 import org.springframework.stereotype.Service;
 
 import com.service.users.application.dto.owner.OwnerRequestDto;
+import com.service.users.application.dto.owner.OwnerResponseDto;
 import com.service.users.application.mapper.OwnerMapper;
 import com.service.users.domain.api.IOwnerServicePort;
 import com.service.users.domain.model.owner.Owner;
@@ -28,9 +29,9 @@ public class OwnerHandler {
         return ownerMapper.toDto(owner);
     }
 
-    public OwnerRequestDto findUserById(Long userId) {
+    public OwnerResponseDto findUserById(Long userId) {
         Owner owner = ownerServicePort.findUserById(userId);
-        return ownerMapper.toDto(owner);
+        return ownerMapper.toResponse(owner);
     }
 
 }

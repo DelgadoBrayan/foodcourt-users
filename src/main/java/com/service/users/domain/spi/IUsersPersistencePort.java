@@ -6,4 +6,5 @@ public interface IUsersPersistencePort {
 
     Users saveUser(Users employee);
 
+    Users findById(Long idUser);
 }
