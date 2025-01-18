@@ -9,6 +9,7 @@ import com.service.users.domain.model.EmployeeRestaurant;
 public interface EmployeeRestaurantMapper {
 
     EmployeeRestaurant toEntity(EmployeeRestaurantDto employeeRestaurantDto);
+    
     EmployeeRestaurantDto toDto(EmployeeRestaurant employeeRestaurant);
 
 }

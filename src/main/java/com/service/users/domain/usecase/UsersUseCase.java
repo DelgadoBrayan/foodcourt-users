@@ -34,7 +34,7 @@ public class UsersUseCase implements IUsersServicePort{
  @Override
 
 public void saveEmployee(Users employee, String token, Long restaurantId) {
-    validateEmployeeFields(employee);
+    validateUserFields(employee);
     Claims claims = Jwts.parserBuilder()
             .setSigningKey(secretKey)
             .build()
@@ -61,7 +61,7 @@ public void saveEmployee(Users employee, String token, Long restaurantId) {
     employee.setPassword(encodedPassword);
     employee.setIdRol(2L);
 
-    Users employeeSave = usersPersistencePort.saveEmployee(employee);
+    Users employeeSave = usersPersistencePort.saveUser(employee);
     EmployeeRestaurant employeeRestaurant = new EmployeeRestaurant(restaurantResponse.getId(), employeeSave.getId());
     employeeRestaurantPersistencePort.saveEmployeeRestaurant(employeeRestaurant);
   
@@ -70,7 +70,7 @@ public void saveEmployee(Users employee, String token, Long restaurantId) {
 
 @Override
 public Users saveClient(Users client) {
-    validateUserFields(client)
+    validateUserFields(client);
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     String encodedPassword = passwordEncoder.encode(client.getPassword());
     client.setPassword(encodedPassword);
@@ -85,11 +85,11 @@ public Users findById(Long userId) {
 }
 
 private void validateUserFields(Users user) {
-    ContactInfo contactInfo = employee.getContactInfo();
-    if (isNullOrEmpty(employee.getLastName())) {
+    ContactInfo contactInfo = user.getContactInfo();
+    if (isNullOrEmpty(user.getLastName())) {
         throw new InvalidUserException("El apellido del usuario no debe estar vacío o nulo");
     }
-    if (isNullOrEmpty(employee.getLastName())) {
+    if (isNullOrEmpty(user.getLastName())) {
         throw new InvalidUserException("El nombre del usuario no debe estar vacío o nulo");
     }
     if (isNullOrEmpty(contactInfo.getDocumentId())) {
@@ -101,7 +101,7 @@ private void validateUserFields(Users user) {
     if (isNullOrEmpty(contactInfo.getEmail()) || !contactInfo.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
         throw new InvalidUserException("El correo debe tener un formato válido");
     }
-    if (isNullOrEmpty(employee.getPassword())) {
+    if (isNullOrEmpty(user.getPassword())) {
         throw new InvalidUserException("La contraseña no debe estar vacía o nula");
     }
 }

@@ -4,7 +4,8 @@ import com.service.users.domain.model.users.Users;
 
 public interface IUsersPersistencePort {
 
-    Users saveUser(Users employee);
+    Users saveUser(Users users);
+
 
     Users findById(Long idUser);
 }
