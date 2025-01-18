@@ -8,6 +8,8 @@ public class AccountInfo {
         this.password = password;
         this.roleId = roleId;
     }
+    
+    public AccountInfo() {}
 
     public String getPassword() {
         return password;

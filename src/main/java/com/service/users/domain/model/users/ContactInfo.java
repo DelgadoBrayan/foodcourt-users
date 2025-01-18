@@ -10,6 +10,8 @@ public class ContactInfo {
         this.phone = phone;
         this.email = email;
     }
+    
+    public ContactInfo() {}
 
     public String getDocumentId() {
         return documentId;

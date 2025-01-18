@@ -12,7 +12,9 @@ public class ContactInfo {
         setPhone(phone);
         setEmail(email);
     }
-
+ 
+    public ContactInfo() {}
+    
     public Long getDocumentId() {
         return documentId;
     }

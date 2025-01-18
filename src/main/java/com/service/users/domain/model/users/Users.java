@@ -16,6 +16,9 @@ public class Users {
         this.password = password;
         this.contactInfo = contactInfo;
     }
+    
+    public Users() {}
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 

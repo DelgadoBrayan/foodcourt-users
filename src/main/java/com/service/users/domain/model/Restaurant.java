@@ -17,6 +17,9 @@ public class Restaurant {
         this.urlLogo = urlLogo;
         this.ownerId = ownerId;
     }
+    
+    public Restaurant() {}
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 
