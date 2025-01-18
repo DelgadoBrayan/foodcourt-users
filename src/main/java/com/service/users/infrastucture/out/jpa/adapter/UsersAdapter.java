@@ -14,13 +14,20 @@ public class UsersAdapter implements IUsersPersistencePort {
 
     private final UserRepository userRepository;
     private final UsersEntityMapper usersEntityMapper;
-    @Override
-    public Users saveEmployee(Users employee) {
 
-        UsersEntity entity = usersEntityMapper.toEntity(employee);
-        UsersEntity saveEmployeeEntity = userRepository.save(entity);
+    @Override
+    public Users saveUser(Users user) {
         
-        return usersEntityMapper.toDomain(saveEmployeeEntity);
+        UsersEntity entity = usersEntityMapper.toEntity(user);
+        UsersEntity saveUserEntity = userRepository.save(entity);
+        
+        return usersEntityMapper.toDomain(saveUserEntity);
+    }
+
+    @Override
+    public Users findById(Long idUser) {
+         UsersEntity entity = userRepository.findById(idUser).orElse(null);
+        return entity != null ? usersEntityMapper.toDomain(entity) : null;
     }
     
 }

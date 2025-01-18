@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.service.users.application.dto.owner.OwnerRequestDto;
+import com.service.users.application.dto.owner.OwnerResponseDto;
 import com.service.users.domain.model.owner.Owner;
 
 
@@ -30,4 +31,14 @@ public interface OwnerMapper {
     @Mapping(source = "owner.contactInfo.documentId", target = "documentId")
     @Mapping(source = "owner.accountInfo.password", target = "password")
     OwnerRequestDto toDto(Owner owner);
+
+    @Mapping(source = "owner.personalInfo.firstName", target = "firstName")
+    @Mapping(source = "owner.personalInfo.lastName", target = "lastName")
+    @Mapping(source = "owner.contactInfo.documentId", target = "documentId")
+    @Mapping(source = "owner.contactInfo.phone", target = "phone")
+    @Mapping(source = "owner.contactInfo.email", target = "email")
+    @Mapping(source = "owner.accountInfo.password", target = "password")
+    @Mapping(source = "owner.personalInfo.birthDate", target = "birthDate", dateFormat = "yyyy-MM-dd")
+    @Mapping(source = "owner.accountInfo.roleId", target = "roleId")
+    OwnerResponseDto toResponse(Owner owner);
 }

@@ -22,4 +22,16 @@ public class UsersHandler {
         usersServicePort.saveEmployee(employee, token, restaurantId);
      
     }
+
+    public UsersRequest saveClient(UsersRequest dto){
+        Users client = usersMapper.toEntity(dto);
+        Users saveClient = usersServicePort.saveClient(client);
+        return usersMapper.toDto(saveClient);
+    }
+
+    public UsersRequest findUserById(Long userId){
+        Users user = usersServicePort.findById(userId);
+        return usersMapper.toDto(user);
+    }
+
 }
