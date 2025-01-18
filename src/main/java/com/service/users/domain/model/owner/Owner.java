@@ -12,6 +12,9 @@ public class Owner {
         this.contactInfo = contactInfo;
         this.accountInfo = accountInfo;
     }
+    
+    public Owner() {}
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 

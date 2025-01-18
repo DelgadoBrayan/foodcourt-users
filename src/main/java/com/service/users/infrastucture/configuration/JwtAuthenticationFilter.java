@@ -32,6 +32,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        if (isSwaggerRequest(request)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authorizationHeader = request.getHeader("Authorization");
 
         try {
@@ -63,5 +69,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throw new InvalidAuthException("Token claims string is empty");
         }
     }
-}
 
+    private boolean isSwaggerRequest(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+        return uri.startsWith("/swagger-ui.html") || uri.startsWith("/swagger-ui/") || uri.startsWith("/v3/api-docs")
+                || uri.startsWith("/swagger-resources/") || uri.startsWith("/webjars/");
+    }
+}

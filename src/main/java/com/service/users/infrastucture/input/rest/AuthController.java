@@ -10,6 +10,7 @@ import com.service.users.application.dto.auth.AuthRequestDto;
 import com.service.users.application.dto.auth.AuthResponseDto;
 import com.service.users.application.handler.AuthenticationHandler;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 
 
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
     private final AuthenticationHandler authHandler;
 
+    @Operation(summary = "Iniciar sesión", description = "Autentica al usuario con las credenciales proporcionadas.")
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto loginRequestDto) {
         AuthResponseDto response = authHandler.login(loginRequestDto);
