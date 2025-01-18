@@ -17,9 +17,9 @@ public class UsersHandler {
     private final IUsersServicePort usersServicePort;
     private final UsersMapper usersMapper;
 
-    public UsersRequest saveEmployee(UsersRequest dto){
+    public void saveEmployee(UsersRequest dto, String token, Long restaurantId){
         Users employee = usersMapper.toEntity(dto);
-        Users saveEmployee = usersServicePort.saveEmployee(employee);
-        return usersMapper.toDto(saveEmployee);
+        usersServicePort.saveEmployee(employee, token, restaurantId);
+     
     }
 }
