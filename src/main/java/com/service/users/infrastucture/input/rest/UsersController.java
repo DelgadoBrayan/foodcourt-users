@@ -21,9 +21,13 @@ import lombok.RequiredArgsConstructor;
 public class UsersController {
     private final UsersHandler usersHandler;
 
-      @PostMapping("/employee")
-    public ResponseEntity<Void> createEmployee(@Valid @RequestBody UsersRequest employeeRequest) {
-        usersHandler.saveEmployee(employeeRequest);
+      @PostMapping("/{restaurantId}/employee")
+    public ResponseEntity<Void> createEmployee(@PathVariable Long restaurantId,
+                                               @Valid @RequestBody UsersRequest employeeRequest, 
+                                               @RequestHeader("Authorization") String authorizationHeader) {
+                                                
+        String token = authorizationHeader.replace("Bearer ", "");                                      
+        usersHandler.saveEmployee(employeeRequest,token, restaurantId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

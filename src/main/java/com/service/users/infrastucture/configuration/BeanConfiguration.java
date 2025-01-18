@@ -2,22 +2,27 @@ package com.service.users.infrastucture.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.service.users.domain.api.IOwnerServicePort;
 import com.service.users.domain.api.IRoleServicePort;
 import com.service.users.domain.api.IUsersServicePort;
+import com.service.users.domain.spi.IEmployeeRestaurantPersistencePort;
 import com.service.users.domain.spi.IOwnerPersistencePort;
 import com.service.users.domain.spi.IRolePersistencePort;
 import com.service.users.domain.spi.IUsersPersistencePort;
 import com.service.users.domain.usecase.OwnerUseCase;
 import com.service.users.domain.usecase.RoleUseCase;
 import com.service.users.domain.usecase.UsersUseCase;
+import com.service.users.infrastucture.out.jpa.adapter.EmployeeRestaurantAdapter;
 import com.service.users.infrastucture.out.jpa.adapter.OwnerAdapter;
 import com.service.users.infrastucture.out.jpa.adapter.RoleAdapter;
 import com.service.users.infrastucture.out.jpa.adapter.UsersAdapter;
+import com.service.users.infrastucture.out.jpa.mapper.EmpRestEntityMapper;
 import com.service.users.infrastucture.out.jpa.mapper.OwnerEntityMapper;
 import com.service.users.infrastucture.out.jpa.mapper.RoleEntityMapper;
 import com.service.users.infrastucture.out.jpa.mapper.UsersEntityMapper;
+import com.service.users.infrastucture.out.jpa.repository.EmployeeRestaurantRepository;
 import com.service.users.infrastucture.out.jpa.repository.OwnerRepository;
 import com.service.users.infrastucture.out.jpa.repository.RoleRepository;
 import com.service.users.infrastucture.out.jpa.repository.UserRepository;
@@ -33,6 +38,10 @@ public class BeanConfiguration {
     private final RoleEntityMapper roleEntityMapper;
     private final UserRepository userRepository;
     private final UsersEntityMapper usersEntityMapper;
+    private final EmployeeRestaurantRepository employeeRestaurantRepository;
+    private final EmpRestEntityMapper empRestEntityMapper;
+    private final WebClient restaurantWebClient;
+    private final byte[] secretKey;
 
     @Bean
     IOwnerPersistencePort ownerPersistencePort(){
@@ -61,7 +70,11 @@ public class BeanConfiguration {
 
     @Bean
     IUsersServicePort usersServicePort() {
-        return new UsersUseCase(usersPersistencePort());
+        return new UsersUseCase(usersPersistencePort(), ownerPersistencePort(), employeeRestaurantPersistencePort(), restaurantWebClient,secretKey);
     }
 
+    @Bean 
+    IEmployeeRestaurantPersistencePort employeeRestaurantPersistencePort(){
+        return new EmployeeRestaurantAdapter(employeeRestaurantRepository, empRestEntityMapper);
+    }
 }

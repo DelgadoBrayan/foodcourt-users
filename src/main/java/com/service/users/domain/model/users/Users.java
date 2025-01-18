@@ -1,13 +1,13 @@
 package com.service.users.domain.model.users;
 
 public class Users {
-    private String id;
+    private Long id;
     private String fistName;
     private String lastName;
     private Long idRol;
     private String password;
     private ContactInfo contactInfo;
-    public Users(String id, String fistName, String lastName, Long idRol, String password,
+    public Users(Long id, String fistName, String lastName, Long idRol, String password,
             ContactInfo contactInfo) {
         this.id = id;
         this.fistName = fistName;
@@ -16,8 +16,8 @@ public class Users {
         this.password = password;
         this.contactInfo = contactInfo;
     }
-    public String getId() {return id;}
-    public void setId(String id) {this.id = id;}
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 
     public String getFistName() {return fistName;}
     public void setFistName(String fistName) {this.fistName = fistName;}
