@@ -38,8 +38,7 @@ public class SecurityConfig {
                         "/webjars/**"             
                     )
                     .permitAll()
-                    .requestMatchers("/api/auth/**")
-                    .permitAll()
+                    .requestMatchers("/api/auth/**", "/api/owner/register").permitAll()
                     .anyRequest().authenticated() 
             )
             .sessionManagement(sessionManagement ->

@@ -21,7 +21,7 @@ public class EmployeeRestaurantAdapter implements IEmployeeRestaurantPersistence
 
     @Override
     public EmployeeRestaurant findById(Long restaurantId) {
-        EmployeeRestaurantEntity entity = employeeRestaurantRepository.findByRestaurantId(restaurantId).orElse(null);
+        EmployeeRestaurantEntity entity = employeeRestaurantRepository.findByEmplooyeId(restaurantId).orElse(null);
         return entity != null ? entityMapper.toDto(entity) : null;
     }
     
